@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 20:08:43 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/01 20:08:44 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/01 23:18:46 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,29 @@
 
 #define SIZE 20
 
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	if (!str)
+		return (0);
+	while (*str++)
+		len++;
+	return (len);
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 void	ft_putstr(char *str)
 {
 	if (!str)
 		return ;
 	while (*str)
 		write(1, str++, 1);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
 void	ft_putnbr(int n)
@@ -46,14 +58,6 @@ void	ft_putnbr(int n)
 	}
 }
 
-static	int	ft_isspace(int c)
-{
-	if (c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	int	num;
@@ -61,7 +65,8 @@ int	ft_atoi(const char *str)
 
 	num = 0;
 	sign = 1;
-	while (ft_isspace(*str))
+	while (*str == '\t' || *str == '\n' || *str == '\v'
+		|| *str == '\f' || *str == '\r' || *str == ' ')
 		str++;
 	if (*str == '-')
 	{
