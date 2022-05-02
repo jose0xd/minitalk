@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unicode_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/02 15:50:02 by jarredon          #+#    #+#             */
+/*   Updated: 2022/05/02 15:52:19 by jarredon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -37,9 +49,12 @@ void	ft_put_uchar(unsigned char byte)
 	if (!ft_len_utf8(byte))
 	{
 		if (i >= 4)
-			exit(EXIT_FAILURE); // TODO
+		{
+			write(1, "Error: UTF-8 corrupted\n", 23);
+			exit(EXIT_FAILURE);
+		}
 		c[i++] = byte;
-		if (len == i + 1)
+		if (len == i)
 			write(1, c, len);
 		return ;
 	}

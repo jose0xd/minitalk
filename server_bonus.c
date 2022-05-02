@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 20:28:41 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/02 13:58:21 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:13:54 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ static void	handler(int signal)
 	}
 	if (make_byte(bit, &byte))
 		ft_put_uchar(byte);
-		/*ft_putchar((char)byte);*/
 	kill(pid, SIGUSR1);
+	if (g_pid_pos == 0)
+		pid = 0;
 }
 
 static void	set_handlers(void)
