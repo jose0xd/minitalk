@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:50:02 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/02 15:52:19 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:29:30 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 #include <unistd.h>
 
 // Return size of unicode. 0 if continuation byte.
-int	ft_len_utf8(unsigned char byte)
+static int	ft_len_utf8(unsigned char byte)
 {
-	int	len;
-
 	if (byte < 0x80)
-		len = 1;
+		return (1);
 	else if (byte < 0xc0)
-		len = 0;
+		return (0);
 	else if (byte < 0xe0)
-		len = 2;
+		return (2);
 	else if (byte < 0xf0)
-		len = 3;
+		return (3);
 	else
-		len = 4;
-	return (len);
+		return (4);
 }
 
 static void	ft_clean_uchar(unsigned char *c)

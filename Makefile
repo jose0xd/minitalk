@@ -6,9 +6,9 @@ OBJ_SERVER = $(SRC_SERVER:.c=.o)
 SRC_CLIENT = client.c utils.c
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 
-SRC_SRV_BONUS = server_bonus.c utils.c unicode_bonus.c
+SRC_SRV_BONUS = server_bonus.c utils_bonus.c unicode_bonus.c
 OBJ_SRV_BONUS = $(SRC_SRV_BONUS:.c=.o)
-SRC_CLT_BONUS = client_bonus.c utils.c
+SRC_CLT_BONUS = client_bonus.c utils_bonus.c
 OBJ_CLT_BONUS = $(SRC_CLT_BONUS:.c=.o)
 
 SERVER = server

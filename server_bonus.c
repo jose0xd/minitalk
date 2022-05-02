@@ -6,25 +6,19 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 20:28:41 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/02 16:13:54 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:42:14 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#include "utils.h"
-#include "unicode.h"
+#include "utils_bonus.h"
+#include "unicode_bonus.h"
 
 static int	g_pid_pos = 0;
 
-static pid_t	get_pid(pid_t pid, int bit)
-{
-	pid += bit << g_pid_pos++;
-	return (pid);
-}
-
-static int	make_byte(int bit, unsigned char *byte)
+static int	make_uchar(int bit, unsigned char *byte)
 {
 	static int	pos = 0;
 
@@ -58,10 +52,10 @@ static void	handler(int signal)
 		exit(EXIT_FAILURE);
 	if (g_pid_pos < (int) sizeof(pid) * 8)
 	{
-		pid = get_pid(pid, bit);
+		pid += bit << g_pid_pos++;
 		return ;
 	}
-	if (make_byte(bit, &byte))
+	if (make_uchar(bit, &byte))
 		ft_put_uchar(byte);
 	kill(pid, SIGUSR1);
 	if (g_pid_pos == 0)
