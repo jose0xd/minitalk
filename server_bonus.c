@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 20:28:41 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/02 13:03:54 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/02 13:58:21 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ static int	make_byte(int bit, unsigned char *byte)
 {
 	static int	pos = 0;
 
+	if (pos == 0)
+		*byte = 0;
 	*byte += bit << pos++;
 	if (pos == 8)
 	{
 		if (!*byte)
+		{
+			*byte = '\n';
 			g_pid_pos = 0;
-		*byte = 0;
+		}
 		pos = 0;
 		return (1);
 	}
@@ -57,14 +61,9 @@ static void	handler(int signal)
 		pid = get_pid(pid, bit);
 		return ;
 	}
-ft_putnbr(g_pid_pos);
-ft_putchar('\n');
 	if (make_byte(bit, &byte))
-		ft_putchar((char)byte);
-		/*write(1, &byte, 1);*/
-	/*ft_put_uchar(byte);*/
-	if (!byte)
-		g_pid_pos = 0;
+		ft_put_uchar(byte);
+		/*ft_putchar((char)byte);*/
 	kill(pid, SIGUSR1);
 }
 
