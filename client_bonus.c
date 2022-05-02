@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 20:28:19 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/02 01:36:51 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:54:08 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ static void	set_handlers(void)
 	sigaction(SIGUSR1, &act, NULL);
 }
 
-static void	send_msg(pid_t pid, char *str)
+static void	send_msg(pid_t pid, unsigned char *str)
 {
 	int	pos;
 	int	len;
 	int	i;
 
-	len = ft_strlen(str);
+	len = ft_strlen((char *)str);
 	i = -1;
 	while (++i <= len)
 	{
 		pos = -1;
-		while (++pos < 7)
+		while (++pos < 8)
 		{
 			if ((str[i] >> pos) & 1)
 				kill(pid, SIGUSR2);
@@ -84,5 +84,5 @@ int	main(int ac, char **av)
 	set_handlers();
 	pid = ft_atoi(av[1]);
 	send_pid(pid);
-	send_msg(pid, av[2]);
+	send_msg(pid, (unsigned char *)av[2]);
 }
